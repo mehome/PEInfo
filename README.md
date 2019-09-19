@@ -34,4 +34,11 @@
 * 最后把核心功能做成DLL，用于其他语言调用（这个很简单啦，打算在最后做）。
 * 增加其他语言调用核心DLL指定PE文件信息。
 
+### 运行截图：
+![image](https://github.com/zmbilx/PEInfo/blob/master/images/2019-09-19_193642.png)
+![image](https://github.com/zmbilx/PEInfo/blob/master/images/2019-09-19_193712.png)
+![image](https://github.com/zmbilx/PEInfo/blob/master/images/2019-09-19_193729.png)
+![image](https://github.com/zmbilx/PEInfo/blob/master/images/2019-09-19_193746.png)
+![image](https://github.com/zmbilx/PEInfo/blob/master/images/2019-09-19_193808.png)
+![image](https://github.com/zmbilx/PEInfo/blob/master/images/2019-09-19_193829.png)
 	
