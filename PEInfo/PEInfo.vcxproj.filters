@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{37f93721-ce14-45d2-8a31-4506be61101f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+    <Text Include="..\纪录.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PEInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PEInfoDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\core.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogSectionTable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogDataDirectory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogImportDirectoryInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogCalator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogExportDirectoryInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PEInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PEInfoDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\core.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogSectionTable.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogImportDirectoryInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogCalator.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogDataDirectoryInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogExportDirectoryInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PEInfo.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\PEInfo.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\PEInfo.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
