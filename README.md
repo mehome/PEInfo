@@ -25,6 +25,9 @@
 
 ### 邮箱：zmbilx@163.com
 
+### 编绎好后二制文件下载链接
+链接：https://pan.baidu.com/s/1Ly_kIbTJTXaqCc7KZhmfWg 提取码：z4gh 
+
 ### 接下来的打算：
 * 优化RVA计算器，因为输入数字部分没有做限制。
 * 把数据目录表的15个数据内容依次做完。
