@@ -30,6 +30,8 @@ void CDialogDataDirectory::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CDialogDataDirectory, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_EXPORT_DIRECTORY_INFO, &CDialogDataDirectory::OnBnClickedButtonExportDirectoryInfo)
 	ON_BN_CLICKED(IDC_BUTTON_IMPORT_DIRECTORY_INFO, &CDialogDataDirectory::OnClickedButtonImportDirectoryInfo)
+//	ON_BN_CLICKED(IDC_BUTTON_RELOCATION_TABLE_INFO, &CDialogDataDirectory::OnBnClickedButtonRelocationTableInfo)
+ON_BN_CLICKED(IDC_BUTTON_RELOCATION_TABLE_INFO, &CDialogDataDirectory::OnClickedButtonRelocationTableInfo)
 END_MESSAGE_MAP()
 
 
@@ -51,6 +53,12 @@ BOOL CDialogDataDirectory::OnInitDialog()
 	if (HasImportTable(m_pImageBase)) {
 		(CButton*)GetDlgItem(IDC_BUTTON_IMPORT_DIRECTORY_INFO)->EnableWindow(TRUE);
 	}
+
+	// 判断是否有重定位表
+	if (HasRelocationTable(m_pImageBase)) {
+		(CButton*)GetDlgItem(IDC_BUTTON_RELOCATION_TABLE_INFO)->EnableWindow(TRUE);
+	}
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 异常: OCX 属性页应返回 FALSE
 }
@@ -174,7 +182,6 @@ void CDialogDataDirectory::OnBnClickedButtonExportDirectoryInfo()
 	m_DialogExportDirectoryInfo.DoModal();
 }
 
-
 void CDialogDataDirectory::OnClickedButtonImportDirectoryInfo()
 {
 	// TODO: 在此添加控件通知处理程序代码
@@ -183,4 +190,15 @@ void CDialogDataDirectory::OnClickedButtonImportDirectoryInfo()
 	GetImportTableInfoF(m_pImageBase, &pImageImportDescriptor, &size);
 	m_DialogImportDirectoryInfo.SetImageImportDescriptorInfo(pImageImportDescriptor, size, m_pImageBase);
 	m_DialogImportDirectoryInfo.DoModal();
+}
+
+void CDialogDataDirectory::OnClickedButtonRelocationTableInfo()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	// 获取相关信息
+	RelocationTableItem relocationTableItem[512];
+	size_t relocationTableItemCount;
+	GetRelocationTableItem(m_pImageBase, relocationTableItem, &relocationTableItemCount, 512);
+	m_DialogReclocationTableInfo.SetRelocationTableItemInfo(relocationTableItem,relocationTableItemCount);
+	m_DialogReclocationTableInfo.DoModal();
 }

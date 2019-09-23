@@ -189,6 +189,20 @@ BOOL HasResourceTable(LPVOID ImageBase)
 	}
 }
 
+BOOL HasRelocationTable(LPVOID ImageBase) {
+	PIMAGE_DOS_HEADER pDH = (PIMAGE_DOS_HEADER)ImageBase;
+	PIMAGE_NT_HEADERS pNtH = (PIMAGE_NT_HEADERS)((DWORD)pDH + pDH->e_lfanew);
+	PIMAGE_DATA_DIRECTORY pDD = &pNtH->OptionalHeader.DataDirectory[5];
+
+	if (0 == pDD->Size)
+	{
+		return FALSE;
+	}
+	else {
+		return TRUE;
+	}
+}
+
 BOOL Rva2offset(LPVOID ImageBase, DWORD VirtualAddress, PDWORD dwOffset)
 {
 	PIMAGE_DOS_HEADER pDH = (PIMAGE_DOS_HEADER)ImageBase;
@@ -331,4 +345,53 @@ VOID GetExportTableFunctionInfoFile(LPVOID pImageBase, PIMAGE_EXPORT_DIRECTORY p
 		}
 	}
 	*sizeOfExportTableFunctions = maxNumberofFunctions;
+}
+
+VOID GetRelocationTableItem(LPVOID ImageBase, PRelocationTableItem pRelocationTableItem,size_t* RelocationTableItemCount, size_t RelocationTableItemMaxCount) {
+
+	// 判断是否存在重定位表
+	if (!HasRelocationTable(ImageBase)) {
+		return;
+	}
+
+	// 获取重定位表的文件偏移信息
+	BYTE secName[9] = { 0 };
+	DWORD dwOffset = 0;
+	PIMAGE_DOS_HEADER pDH = (PIMAGE_DOS_HEADER)ImageBase;
+	PIMAGE_NT_HEADERS pNtH = (PIMAGE_NT_HEADERS)((DWORD)pDH + pDH->e_lfanew);
+	PIMAGE_OPTIONAL_HEADER pOH = &pNtH->OptionalHeader;
+
+	Rva2offset(ImageBase, pOH->DataDirectory[5].VirtualAddress,&dwOffset);
+	//rec指向重定位表第一个IMAGE_BASE_RELOCATION结构体，获取对应的文件偏移地址
+	IMAGE_BASE_RELOCATION * rec = (IMAGE_BASE_RELOCATION *)((DWORD)ImageBase + dwOffset);
+
+	// 如果超过最大的数，直接返回
+	if (rec->SizeOfBlock > RelocationTableItemMaxCount) {
+		return;
+	}
+
+	// 结束，如果为0，则结束此偏移
+	size_t i = 0;
+	for (i = 0; rec->SizeOfBlock && rec->VirtualAddress; i++) {
+		// 想要获取当前的重定位表的文件偏移
+		Rva2offset(ImageBase, rec->VirtualAddress, &dwOffset);
+		DWORD foa = (DWORD)ImageBase + dwOffset;
+
+		//确定该结构体所处节，并获取节名称
+		PIMAGE_SECTION_HEADER pSH = IMAGE_FIRST_SECTION(pNtH);
+		for (int t = 0; t < pNtH->FileHeader.NumberOfSections; t++) {
+			Rva2offset(ImageBase,pSH[t].VirtualAddress, &dwOffset);
+			DWORD lower = (DWORD)ImageBase + dwOffset;
+			DWORD upper = lower + pSH[t].Misc.VirtualSize;
+			if (foa >= lower && foa <= upper) {
+				memcpy(pRelocationTableItem[i].Item, pSH[t].Name, 8);
+				pRelocationTableItem[i].SizeOfBlock = rec->SizeOfBlock;
+				pRelocationTableItem[i].VirtualAddress = rec->VirtualAddress;
+				break;
+			}
+		}
+		//进行下一页的判断
+		rec = (IMAGE_BASE_RELOCATION *)((BYTE *)rec + rec->SizeOfBlock);
+	}
+	*RelocationTableItemCount = i;
 }

@@ -3,6 +3,7 @@
 #include "./Core/core.h"
 #include "DialogImportDirectoryInfo.h"
 #include "DialogExportDirectoryInfo.h"
+#include "DialogRelocationTableInfo.h"
 
 // CDialogDataDirectory ¶Ô»°¿ò
 
@@ -34,10 +35,11 @@ private:
 	LPVOID m_pImageBase;
 	CDialogImportDirectoryInfo m_DialogImportDirectoryInfo;
 	CDialogExportDirectoryInfo m_DialogExportDirectoryInfo;
-
+	CDialogRelocationTableInfo m_DialogReclocationTableInfo;
 
 public:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedButtonExportDirectoryInfo();
 	afx_msg void OnClickedButtonImportDirectoryInfo();
+	afx_msg void OnClickedButtonRelocationTableInfo();
 };

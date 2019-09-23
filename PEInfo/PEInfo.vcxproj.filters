@@ -55,6 +55,9 @@
     <ClInclude Include="DialogExportDirectoryInfo.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="DialogRelocationTableInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PEInfo.cpp">
@@ -82,6 +85,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="DialogExportDirectoryInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogRelocationTableInfo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

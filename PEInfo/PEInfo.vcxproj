@@ -195,6 +195,7 @@
     <ClInclude Include="DialogDataDirectory.h" />
     <ClInclude Include="DialogExportDirectoryInfo.h" />
     <ClInclude Include="DialogImportDirectoryInfo.h" />
+    <ClInclude Include="DialogRelocationTableInfo.h" />
     <ClInclude Include="DialogSectionTable.h" />
     <ClInclude Include="PEInfo.h" />
     <ClInclude Include="PEInfoDlg.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="DialogDataDirectoryInfo.cpp" />
     <ClCompile Include="DialogExportDirectoryInfo.cpp" />
     <ClCompile Include="DialogImportDirectoryInfo.cpp" />
+    <ClCompile Include="DialogRelocationTableInfo.cpp" />
     <ClCompile Include="DialogSectionTable.cpp" />
     <ClCompile Include="PEInfo.cpp" />
     <ClCompile Include="PEInfoDlg.cpp" />

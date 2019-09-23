@@ -5,6 +5,9 @@
 // 为使用StringCchPrintf函数
 #include<strsafe.h>
 
+// 文件缓冲区长度
+#define BUFFLENTH 8
+
 // 文件结构
 typedef struct _MAP_FILE_STRUCT
 {
@@ -25,6 +28,13 @@ typedef struct _ExportTableFunctions {
 	DWORD RVA;
 	DWORD AddressOfName;
 }ExportTableFunctions,*PExportTableFunctions;
+
+// 重定向表条目
+typedef struct _RelocationTableItem {
+	DWORD VirtualAddress;
+	DWORD SizeOfBlock;
+	CHAR Item[BUFFLENTH];
+}RelocationTableItem,* PRelocationTableItem;
 
 // 选择PE文件
 BOOL ChooseFile(HWND hwnd, TCHAR szFilePath[MAX_PATH]);
@@ -71,6 +81,9 @@ VOID GetExportTableInfo(LPVOID ImageBase, PIMAGE_EXPORT_DIRECTORY* pED);
 // 获取导出表导出的函数
 VOID GetExportTableFunctionInfoFile(LPVOID pImageBase, PIMAGE_EXPORT_DIRECTORY pED, PExportTableFunctions pExportTableFunctionsOut, size_t maxExportTableFunctions, size_t* sizeOfExportTableFunctions);
 
+// 获取重定位表信息
+VOID GetRelocationTableItem(LPVOID ImageBase, PRelocationTableItem pRelocationTableItem, size_t* RelocationTableItemCount, size_t RelocationTableItemMaxCount);
+
 // 是否有导出表
 BOOL HasExportTable(LPVOID ImageBase);
 
@@ -79,6 +92,9 @@ BOOL HasImportTable(LPVOID ImageBase);
 
 // 是否有资源表
 BOOL HasResourceTable(LPVOID ImageBase);
+
+// 是否有重定位表
+BOOL HasRelocationTable(LPVOID ImageBase);
 
 // RVA转换为文件偏移
 BOOL Rva2offset(LPVOID ImageBase, DWORD VirtualAddress, PDWORD dwOffset);
