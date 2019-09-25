@@ -1,0 +1,13 @@
+﻿  stdafx.cpp
+  core.cpp
+  PEInfoDlg.cpp
+  PEInfo.cpp
+  DialogSectionTable.cpp
+  DialogRelocationTableInfo.cpp
+  DialogImportDirectoryInfo.cpp
+  DialogExportDirectoryInfo.cpp
+  DialogDataDirectoryInfo.cpp
+  DialogCalator.cpp
+  正在生成代码...
+  PEInfo.vcxproj -> C:\Users\admin\Desktop\PEInfo\Debug\PEInfo.exe
+  PEInfo.vcxproj -> C:\Users\admin\Desktop\PEInfo\Debug\PEInfo.pdb (Full PDB)

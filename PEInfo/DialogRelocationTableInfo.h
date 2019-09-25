@@ -22,14 +22,18 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	void SetRelocationTableItemInfo(PRelocationTableItem pRelocationTableItem, size_t RelocationTableItemCount);
+	void SetRelocationTableItemInfo(LPVOID pImageBase,PRelocationTableItem pRelocationTableItem, size_t RelocationTableItemCount);
 	void AddListCtrl1Info(PRelocationTableItem pRelocationTableItem, size_t RelocationTableItemCount);
+	void AddListCtrl2Info(PRelocationTableItemInfo pRelocationTableItemInfo, DWORD SizeOfRelocationTableItemInfo);
 private:
 	PRelocationTableItem m_pRelocationTableItem;
+	LPVOID m_pImageBase;
 	size_t m_RelocationTableItemCount;
 
 public:
 	CListCtrl m_listCtrl1;
 	CListCtrl m_listCtrl2;
 	virtual BOOL OnInitDialog();
+	afx_msg void OnClickList1(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnItemchangedList1(NMHDR *pNMHDR, LRESULT *pResult);
 };

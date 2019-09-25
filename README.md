@@ -1,6 +1,11 @@
 # PEInfo
 用于读取指定PE文件相关信息
 
+### 更新说明 V1.01：
+* 增加重定位表信息的读取功能
+* 结果如图所示：
+![image](https://github.com/zmbilx/PEInfo/blob/master/images/update.png)
+
 ### 开发环境： VS2015 + WIN1064bit + C++
 
 #### 界面库:MFC 
@@ -36,9 +41,4 @@
 
 ### 运行截图：
 ![image](https://github.com/zmbilx/PEInfo/blob/master/images/2019-09-19_193642.png)
-![image](https://github.com/zmbilx/PEInfo/blob/master/images/2019-09-19_193712.png)
-![image](https://github.com/zmbilx/PEInfo/blob/master/images/2019-09-19_193729.png)
-![image](https://github.com/zmbilx/PEInfo/blob/master/images/2019-09-19_193746.png)
-![image](https://github.com/zmbilx/PEInfo/blob/master/images/2019-09-19_193808.png)
-![image](https://github.com/zmbilx/PEInfo/blob/master/images/2019-09-19_193829.png)
 	

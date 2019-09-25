@@ -199,6 +199,6 @@ void CDialogDataDirectory::OnClickedButtonRelocationTableInfo()
 	RelocationTableItem relocationTableItem[512];
 	size_t relocationTableItemCount;
 	GetRelocationTableItem(m_pImageBase, relocationTableItem, &relocationTableItemCount, 512);
-	m_DialogReclocationTableInfo.SetRelocationTableItemInfo(relocationTableItem,relocationTableItemCount);
+	m_DialogReclocationTableInfo.SetRelocationTableItemInfo(m_pImageBase,relocationTableItem,relocationTableItemCount);
 	m_DialogReclocationTableInfo.DoModal();
 }

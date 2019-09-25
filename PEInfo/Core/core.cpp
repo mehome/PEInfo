@@ -384,9 +384,11 @@ VOID GetRelocationTableItem(LPVOID ImageBase, PRelocationTableItem pRelocationTa
 			DWORD lower = (DWORD)ImageBase + dwOffset;
 			DWORD upper = lower + pSH[t].Misc.VirtualSize;
 			if (foa >= lower && foa <= upper) {
+				memset(pRelocationTableItem[i].Item, 0, sizeof(pRelocationTableItem[i].Item));
 				memcpy(pRelocationTableItem[i].Item, pSH[t].Name, 8);
 				pRelocationTableItem[i].SizeOfBlock = rec->SizeOfBlock;
 				pRelocationTableItem[i].VirtualAddress = rec->VirtualAddress;
+				pRelocationTableItem[i].FileAddress = (DWORD)rec;
 				break;
 			}
 		}
@@ -394,4 +396,28 @@ VOID GetRelocationTableItem(LPVOID ImageBase, PRelocationTableItem pRelocationTa
 		rec = (IMAGE_BASE_RELOCATION *)((BYTE *)rec + rec->SizeOfBlock);
 	}
 	*RelocationTableItemCount = i;
+}
+
+VOID GetRelocationTableItemInfo(PRelocationTableItem pRelocationTableItem, PRelocationTableItemInfo pRelocationTableItemInfo,
+	PDWORD pSizeOfRelocationTableItemInfo,DWORD maxSizeOfRelocationTableItemInfo) {
+	
+	DWORD size = (pRelocationTableItem->SizeOfBlock - 8) / 2;
+	if (size > maxSizeOfRelocationTableItemInfo) {
+		return;
+	}
+	*pSizeOfRelocationTableItemInfo = size;
+
+	//recAddr指向重定位表结构体后的首字节
+	PWORD recAddr = (PWORD)(BYTE*)(pRelocationTableItem->FileAddress + 8);
+	
+
+	// 这的size标记着一共有多少个块
+	for (DWORD i = 0; i < size; i++) {
+		DWORD offset = (recAddr[i] & 0X0FFF) + pRelocationTableItem->VirtualAddress;//低四位是偏移地址
+		WORD type = recAddr[i] >> 12;//高四位是有效判断位
+
+		// 如果高4位为3，则此重定位信息为有效信息，其他数值windows未定义
+		pRelocationTableItemInfo[i].Offset = offset;
+		pRelocationTableItemInfo[i].Type = type;
+	}
 }

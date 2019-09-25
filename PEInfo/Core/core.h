@@ -6,7 +6,7 @@
 #include<strsafe.h>
 
 // 文件缓冲区长度
-#define BUFFLENTH 8
+#define BUFFLENTH 32
 
 // 文件结构
 typedef struct _MAP_FILE_STRUCT
@@ -33,8 +33,15 @@ typedef struct _ExportTableFunctions {
 typedef struct _RelocationTableItem {
 	DWORD VirtualAddress;
 	DWORD SizeOfBlock;
+	DWORD FileAddress;
 	CHAR Item[BUFFLENTH];
 }RelocationTableItem,* PRelocationTableItem;
+
+// 重定向表条目
+typedef struct _RelocationTableItemInfo {
+	DWORD Offset;
+	DWORD Type;
+}RelocationTableItemInfo, *PRelocationTableItemInfo;
 
 // 选择PE文件
 BOOL ChooseFile(HWND hwnd, TCHAR szFilePath[MAX_PATH]);
@@ -83,6 +90,9 @@ VOID GetExportTableFunctionInfoFile(LPVOID pImageBase, PIMAGE_EXPORT_DIRECTORY p
 
 // 获取重定位表信息
 VOID GetRelocationTableItem(LPVOID ImageBase, PRelocationTableItem pRelocationTableItem, size_t* RelocationTableItemCount, size_t RelocationTableItemMaxCount);
+
+// 获取重定位表指定条目详细信息
+VOID GetRelocationTableItemInfo(PRelocationTableItem pRelocationTableItem, PRelocationTableItemInfo pRelocationTableItemInfo, PDWORD pSizeOfRelocationTableItemInfo, DWORD maxSizeOfRelocationTableItemInfo);
 
 // 是否有导出表
 BOOL HasExportTable(LPVOID ImageBase);
